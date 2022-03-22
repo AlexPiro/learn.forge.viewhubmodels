@@ -39,6 +39,14 @@ function launchViewer(urn, viewableId) {
     var viewables = (viewableId ? doc.getRoot().findByGuid(viewableId) : doc.getRoot().getDefaultGeometry());
     viewer.loadDocumentNode(doc, viewables).then(i => {
       // any additional action here?
+        
+        viewer.addEventListener(Autodesk.Viewing.HIDE_EVENT, (nodes, model)=> {   
+            alert(`Hidding nodes ${nodes.nodeIdArray} - List of hidden nodes ${viewer.getHiddenNodes(model)}`)
+        })
+        
+        viewer.addEventListener(Autodesk.Viewing.SHOW_EVENT, (nodes, model)=> {   
+            alert(`Showing nodes ${nodes.nodeIdArray} - List of hidden nodes ${viewer.getHiddenNodes(model)}`)
+        })
     });
   }
 
